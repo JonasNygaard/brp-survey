@@ -1,0 +1,517 @@
+%!TEX program = pdflatex
+%----------------------------------------------------------------------------------------------------------------------
+% Author: Jonas Nygaard Eriksen
+% Encoding: UTF8
+% LaTeX File for "Expected Business Conditions and Bond Risk Premia" 
+% Last modified: December, 2015
+%----------------------------------------------------------------------------------------------------------------------
+% PREAMBLE
+%----------------------------------------------------------------------------------------------------------------------
+
+% Require the nag package to warn about obsolete stuff
+\RequirePackage[l2tabu,orthodox]{nag}
+
+% Formatting JFQA requirements
+% \documentclass[12pt,letterpaper,leqno,doublespacing]{article}
+% \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+% \usepackage{setspace}  
+% \usepackage{footmisc}
+% \renewcommand{\footnotelayout}{\doublespacing}
+% \setlength{\footnotesep}{0.5cm}
+% \makeatletter
+%     \renewcommand\@seccntformat[1]{\csname the#1\endcsname.\quad}
+% \makeatother
+% \renewcommand{\thesection}{\Roman{section}}
+% \renewcommand{\thesubsection}{\Alph{subsection}}
+% \renewcommand{\thesubsubsection}{\Alph{subsection}.\arabic{subsubsection}}
+
+% Setting document class, font, font size, and bibliography op tions
+\documentclass[12pt,a4paper,onecolumn,oneside,notitlepage]{article}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+
+% Setting bibliography and typography options
+\usepackage[longnamesfirst]{natbib}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{eucal}
+\usepackage[T1]{fontenc}
+\usepackage{hyphenat}
+\usepackage{microtype}
+\usepackage{verbatim}
+
+% Loading math packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Loading tables and figures packages
+\usepackage{makeidx}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{seqsplit}
+\usepackage{rotating}
+\usepackage{multicol}
+
+% Loading auxiliary packages
+\usepackage{soul}
+\usepackage{blindtext}
+\usepackage{appendix}
+
+% Setting caption options
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{
+    labelfont = bf,
+    labelsep = colon
+}
+
+% Setting coloring of links and references
+\usepackage{hyperref}
+\usepackage{xcolor}
+\definecolor{au_blue}{RGB}{5,61,115}
+\definecolor{navy_blue}{RGB}{0,0,128}
+\definecolor{dark_red}{RGB}{153,0,0}
+\definecolor{stylish_brown}{RGB}{188,90,100}
+\definecolor{dark_orange}{RGB}{233,129,45}
+\hypersetup{
+    colorlinks=true,
+    breaklinks=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksdepth=2,
+    citecolor=dark_red,
+    linkcolor=dark_red,
+    urlcolor=navy_blue,
+    pdftitle={Expected Business Conditions and Bond Risk Premia},
+    pdfauthor={Jonas Nygaard Eriksen}
+}
+
+% Setting up values for table creation
+\renewcommand{\arraystretch}{0.95}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+
+% SETTING BIBLIOGRAPHY PROPERTIES
+\setlength{\bibsep}{0.1pt plus 0.3ex}
+
+%----------------------------------------------------------------------------------------------------------------------
+% FRONT MATTER
+%----------------------------------------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Defining title and footnotes
+\pagenumbering{Alph}
+\newcommand{\mytitle}{\textbf{\Large{Expected Business Conditions and Bond Risk Premia}} \\~\\ Tables and figures file}
+\renewcommand{\refname}{References}
+\long\def\symbolfootnote[#1]#2{\begingroup\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+% Setting up custom title page
+\begin{titlepage}
+
+    \thispagestyle{empty}
+    \setlength{\parindent}{0cm}
+    \begin{center}
+
+        \small
+        \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+        \vspace*{4cm} 
+        \mytitle\symbolfootnote[1]{
+            I am grateful to Stig Vinther Møller, Maik Schmeling, an anonymous referee, and seminar participants at Aarhus University and CREATES and the 2015 Nordic Econometric Meeting in Helsinki for helpful comments and suggestions. The author acknowledge support from CREATES - Center for Research in Econometric Analysis of Time Series (DNRF78), funded by the Danish National Research Foundation
+        }
+
+        \vspace*{2cm}
+        \textbf{\normalsize{
+            Jonas Nygaard Eriksen}\symbolfootnote[7]{CREATES, Department of Economics and Business Economics, Aarhus University, Fuglesangs All{\'e} 4, DK-8210 Aarhus V, Denmark. Tel.: +45 87165321. E-mail: \href{mailto:jeriksen@econ.au.dk}{jeriksen@econ.au.dk}.
+            }
+        }
+
+        \vspace{1.2cm}
+        {
+            \normalsize  
+            \vspace{1.5cm}
+            This version: \today
+        }
+        \clearpage
+        \thispagestyle{empty}
+        \vspace*{2cm}
+        \mytitle
+        \vspace*{0.5cm}
+        \begin{singlespace}
+            \begin{abstract}
+                \noindent This paper studies the predictability of bond risk premia by means of expectations to future business conditions using survey forecasts from the Survey of Professional Forecasters. We show that expected business conditions consistently affect excess bond returns and that the inclusion of expected business conditions in standard predictive regressions improve forecast performance relative to models using information derived from the current term structure or macroeconomic variables. The results are confirmed in a real-time out-of-sample exercise, where the predictive accuracy of the models is evaluated both statistically and from the perspective of a mean-variance investor that trades in the bond market.  \\\bigskip
+                \noindent\textbf{Keywords:} Bond risk premia, expected business conditions, predictability, economic value, expectations hypothesis, time-varying risk premia\\\medskip
+                \noindent\textbf{JEL Classification:} E43, E44, E47, G11, G12. \\\bigskip
+                \noindent\textbf{This version:} \today
+            \end{abstract}
+        \end{singlespace}
+    \end{center}        
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------------------------------------
+% INTRODUCTION
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+%----------------------------------------------------------------------------------------------------------------------
+% FIGURES
+%----------------------------------------------------------------------------------------------------------------------
+
+% SURVEY-EXPECTATIONS AND REALIZED MACRO-VARIABLES
+\clearpage
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Estimated survey factors.} \newline
+        This figure illustrates the time series dynamics of the survey factors estimated from the term structure of survey forecasts. The factors are plotted against National Bureau of Economic Research (NBER) recession periods marked in gray shading. The principal components are estimated using the full range of available observations covering the period 1968:Q4 to 2014:Q4. 
+    }
+    \centering
+    \includegraphics[scale=1]{Figures/e_principal_components.eps}
+    \label{Fig:e_principal_components}
+\end{figure}
+
+
+% TIME SERIES DYNAMICS OF THE ME FACTORS
+\clearpage
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Time series dynamics of the ME$_{t}$ factor.} \newline
+        This figure illustrates the relation between expected business conditions $\left(\text{ME}_{t}\right)$ and the real economy as measured by the Chicago National Activity Index (CFNAI$_{t}$) and National Bureau of Economic Research (NBER) defined recession periods in gray shading over the sample period 1968:Q4-2014:Q4. ME$_{t}$ and CFNAI$_{t}$ are plotted in standardized units for convenience. 
+    }
+    \centering
+    \includegraphics[scale=1]{Figures/e_me_cfnai.eps}
+    \label{Fig:e_me_cfnai}
+\end{figure}
+
+% CUMULATIVE DIFFERENCES IN SQUARED FORECAST ERRORS
+\clearpage
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Differences in cumulative squared prediction errors.} \newline
+        This figure illustrates the relative forecasting performance by plotting the difference in cumulative squared prediction errors from (\ref{eq:e_dcsfe}) between the candidate forecasting model and the expectations hypothesis (EH) model  over the out-of-sample evaluation period, which covers the period from 1990:Q1 to 2014:Q4. National Bureau of Economic Research (NBER) recession periods are marked in gray shading.
+    }
+    \centering
+    \includegraphics[scale=1]{Figures/e_dcsfe.eps}
+    \label{Fig:e_dcsfe}
+\end{figure}
+
+% CUMULATIVE DIFFERENCES IN UTILITY GAINS
+\clearpage
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Differences in cumulative realized utility.} \newline
+        This figure illustrates the relative portfolio performance by plotting the difference in cumulative realized utility from (\ref{eq:e_average_utility}) between the candidate forecasting model and the expectations hypothesis (EH) model  over the out-of-sample evaluation period, which covers the period from 1990:Q1 to 2014:Q4. National Bureau of Economic Research (NBER) recession periods are marked in gray shading.
+    }
+    \centering
+    \includegraphics[scale=1]{Figures/e_dcutil.eps}
+    \label{Fig:e_dcutil}
+\end{figure}
+
+%----------------------------------------------------------------------------------------------------------------------
+% TABLES
+%----------------------------------------------------------------------------------------------------------------------
+
+% SUMMARY STATISTICS FOR SPF VARIABLES
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Descriptive statistics: Survey variables.} \newline
+        This table reports descriptive statistics for the median expected growth rates for the macroeconomic fundamentals collected from the Survey of Professional Forecasters (SPF). The variables include: 1) GDP $\left(\text{gdp}_{t}^{\mathbb{E}}\right)$, 2) the GDP price index $\left(\text{inf}_{t}^{\mathbb{E}}\right)$, 3) the unemployment rate $\left(\text{unemp}_{t}^{\mathbb{E}}\right)$, 4) corporate profits after tax $\left(\text{cprof}_{t}^{\mathbb{E}}\right)$, 5) industrial production $\left(\text{ip}_{t}^{\mathbb{E}}\right)$, and 6) housing starts $\left(\text{hous}_{t}^{\mathbb{E}}\right)$. We report means, standard deviations, skewness, and kurtosis for each fundamental and forecast horizon. The last three rows in each panel reports the loadings from the principal component estimation. The sample covers the period from 1968:Q4 to 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{ZYYYYYYYYYYY}
+        \toprule
+        \input{Tables/e_sumstat_survey_variables}
+        \bottomrule
+        \label{Tab:e_sumstat_survey_variables}
+    \end{tabularx}
+\end{table}
+
+
+% ESTIMATING THE MACRO-EXPECTATIONS FACTOR
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Estimating the macroeconomic expectations factor.} \newline
+        This table reports slope estimates from regressing one-year ahead bond risk premia upon the first three principal components ($\mathcal{P}_{1,t}^{\mathbb{E}}$,$\mathcal{P}_{2,t}^{\mathbb{E}}$,$\mathcal{P}_{3,t}^{\mathbb{E}}$) of the Survey of Professional Forecasters (SPF) forecasts and expected business conditions $\left(\text{ME}_{t}\right)$ in rows (a) and (b), respectively. Although not reported, all regressions contain an intercept. \cite{HansenHodrick1980} t-statistics implemented with four lags are presented in parentheses. Adj. R$^{2}\left(\%\right)$ denotes the full sample adjusted coefficient of determination in percentage. The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYY}
+        \toprule
+        \input{Tables/e_me_estimation}
+        \bottomrule
+        \label{Tab:e_me_estimation}
+    \end{tabularx}
+\end{table}
+
+
+% SUMMARY STATISTICS
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Descriptive statistics: Bond risk premia and forecasting factors.} \newline
+        This table reports descriptive statistics for excess bond returns $rx_{t+4}^{\left(n\right)}$, $n=2,\ldots,5$ and predictor variables used in the empirical analyses (Panel A) and their contemporaneous correlations (Panel B). CP$_{t}$ is the forward rate-based factor from \cite{CochranePiazzesi2005}, LN$_{t}$ is the macro-based factor from \cite{LudvigsonNg2009}, and ME$_{t}$ represents our proxy for expected business conditions described in Section \ref{Sec:e_measuring_ebc}. For each variable, we report means, standard deviations, skewness, and kurtosis as well as first- and second-order autocorrelations. In addition, we report Sharpe ratios (SR) for each of the Treasury bonds. The sample covers the period from 1968:Q4 to 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\linewidth}{ZYYYYYYYY}
+        \toprule
+        \input{Tables/e_sumstat_brp_factor}
+        \bottomrule
+        \label{Table:e_sumstat_brp_factor}
+    \end{tabularx}
+\end{table}
+
+% JOSLIN-PRIEBSCH-SINGLETON MACRO-SPANNING CONDITION
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Macro-spanning condition for expected business conditions.} \newline
+        This table reports slope estimates from the \cite{JoslinPriebschSingleton2014} macro-spanning condition in (\ref{eq:e_macro_spanning_condition}). Although not reported, all regressions contain an intercept. $\mathcal{P}_{1,t}^{\mathbb{E}}$, $\mathcal{P}_{2,t}^{\mathbb{E}}$, and $\mathcal{P}_{3,t}^{\mathbb{E}}$ denote the first three principal components estimated from survey forecasts and level$_{t}$, slope$_{t}$, curv$_{t}$, $\mathcal{Y}_{4,t}$, and $\mathcal{Y}_{5,t}$ are the principal components of the yield covariance matrix. \cite{NeweyWest1987} t-statistics implemented with six lags are presented in parentheses. Adj. R$^{2}\left(\%\right)$ denotes the full sample adjusted coefficient of determination in percentage. The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{ZYYYYYYc}
+        \toprule
+        \input{Tables/e_spanning_restriction}
+        \bottomrule
+        \label{Tab:e_spanning_restriction}
+    \end{tabularx}
+\end{table}
+
+
+% IN-SAMPLE RESULTS
+\clearpage
+\begin{table}[htbp]
+    \scriptsize
+    \caption{
+        \textbf{In-sample results.} \newline
+        This table reports slope estimates from regressing one-year ahead bond risk premia upon various combinations of predictors. CP$_{t}$ is the forward rate-based factor from \cite{CochranePiazzesi2005}, LN$_{t}$ is the macro-based factor from \cite{LudvigsonNg2009}, and ME$_{t}$ represents our proxy for expected business conditions described in Section \ref{Sec:e_measuring_ebc}. Although not reported, all regressions contain an intercept. \cite{HansenHodrick1980} t-statistics implemented with four lags are presented in parentheses. Adj. R$^{2}\left(\%\right)$ denotes the full sample adjusted coefficient of determination in percentage. The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYYY}
+        \toprule
+        \input{Tables/e_insample_results}
+        \bottomrule
+        \label{Tab:e_insample_results}
+    \end{tabularx}
+\end{table}
+
+% OUT-OF-SAMPLE RESULTS
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Out-sample-results.} \newline
+        This table reports the out-of-sample results from forecasting one-year ahead bond risk premia using various combinations of predictors. CP$_{t}$ is the forward rate-based factor from \cite{CochranePiazzesi2005}, LN$_{t}$ is the macro-based factor from \cite{LudvigsonNg2009}, and ME$_{t}$ represents our proxy for expected business conditions described in Section \ref{Sec:e_measuring_ebc}. Panel A reports the \cite{CampbellThompson2008} R$^{2}_{oos}$ statistic from (\ref{eq:e_r2oos}) relative to the expectations hypothesis (EH) benchmark accompanied by p-values from \cite{ClarkWest2007} tests of equal predictive ability in square brackets. Panel B reports annualized percentage utility gain, $\Delta\left(\%\right)$, relative to the EH model accompanied by p-valued from \cite{DieboldMariano1995} tests of equal utilities in square brackets. Finally, Panel C reports annualized \cite{GoetzmannIngersollSpiegelWelch} manipulation-proof performance measures, $\Theta\left(\%\right)$. The out-of-sample evaluation period starts in 1990:Q1 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYYY}
+        \toprule
+        \input{Tables/e_out_of_sample_results}
+        \bottomrule
+        \label{Tab:e_out_of_sample_results}
+    \end{tabularx}
+\end{table}
+
+% MODEL COMPARISONS
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Model Comparisons.} \newline
+        This table reports the out-of-sample results from forecasting one-year ahead bond risk premia using nested models with and without expected business conditions $\left(\text{ME}_{t}\right)$. R$^{2}_{\text{oos}}$ is the out-of-sample R$^{2}$ suggested in \cite{CampbellThompson2008}. For each R$^{2}_{\text{oos}}$, we report p-values from the \cite{ClarkWest2007} test of equal predictive ability in square brackets. $\Delta\left(\%\right)$ denotes the annualized percentage utility gain between the model including expected business conditions and the nested benchmark omitting expected business conditions. $\Theta\left(\%\right)$ is the annualized manipulation-proof measure from \cite{GoetzmannIngersollSpiegelWelch}. For each $\Delta\left(\%\right)$, we report p-values from the \cite{DieboldMariano1995} test in square brackets. The out-of-sample evaluation period starts in 1990:Q1 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYYYYYY}
+        \toprule
+        \input{Tables/e_out_of_sample_model_comparison}
+        \bottomrule
+        \label{Tab:e_out_of_sample_model_comparison}
+    \end{tabularx}
+\end{table}
+
+ 
+% OUT-OF-SAMPLE FORECAST COMBINATION RESULTS
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Forecast combination.} \newline
+        This table reports the out-of-sample results from forecasting one-year ahead bond risk premia using combinations of forecasts. Panel A presents the results from combining forecasts from the three CP$_{t}$ and LN$_{t}$ models and Panel B presents the results from combining forecasts for all seven model. R$^{2}_{\text{oos}}$ is the out-of-sample R$^{2}$ suggested in \cite{CampbellThompson2008}. For each R$^{2}_{\text{oos}}$, we report p-values from the \cite{ClarkWest2007} test of equal predictive ability in square brackets. $\Delta\left(\%\right)$ denotes the annualized percentage utility gain between the model including expected business conditions and the nested benchmark omitting expected business conditions. $\Theta\left(\%\right)$ is the annualized manipulation-proof measure from \cite{GoetzmannIngersollSpiegelWelch}. For each $\Delta\left(\%\right)$, we report p-values from the \cite{DieboldMariano1995} test in square brackets. The out-of-sample evaluation period starts in 1990:Q1 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYYYYYYYYYY}
+        \toprule
+        \input{Tables/e_forecast_combination}
+        \bottomrule
+        \label{Tab:e_forecast_combination}
+    \end{tabularx}
+\end{table}
+
+
+% % CORRELATION MEASURES OF FORECASTING PERFORMANCE
+\clearpage
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Forecast performance, expected returns, and economic variables.} \newline
+        This table reports contemporaneous correlations between relative forecast and portfolio performance and the real economy as measured by the Chicago Fed National Activity Index $\left(\text{CFNAI}_{t}\right)$ in Panels A and B. Relative forecast performance is defined as the difference in cumulative squared prediction error $\left(\text{DCSPE}_{t}\right)$ from (\ref{eq:e_dcsfe}) and portfolio performance is the cumulative difference in realized utilities $\left(\text{DCRU}_{t}\right)$ from (\ref{eq:e_average_utility}). Panels C and D report contemporaneous correlations between expected bond risk premia and the CFNAI$_{t}$ and macroeconomic uncertainty $\left(\mathbb{U}_{t}^{\text{Macro}}\right)$, respectively. Macro uncertainty is the uncertainty index constructed in \cite{JuradoLudvgisonNg2015}. The out-of-sample evaluation period starts in 1990:Q1 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYcYYYY}
+        \toprule
+        \input{Tables/e_links_to_the_real_economy}
+        \bottomrule
+        \label{Tab:e_links_to_the_real_economy}
+    \end{tabularx}
+\end{table}
+
+% IN-SAMPLE RESULTS FOR GSW BOND DATA
+\clearpage
+\begin{table}[htbp]
+    \caption{
+        \textbf{In-sample results for quarterly bond risk premia.} \newline
+        This table reports slope estimates from regressing one-quarter ahead bond risk premia upon various combinations of predictors. CP$_{t}^{\text{GSW}}$ is the forward rate-based factor from \cite{CochranePiazzesi2005}, LN$_{t}^{\text{GSW}}$ is the macro-based factor from \cite{LudvigsonNg2009}, and ME$_{t}^{\text{GSW}}$ represents our proxy for expected business conditions described in Section \ref{Sec:e_measuring_ebc}. Although not reported, all regressions contain an intercept. \cite{NeweyWest1987} t-statistics implemented with six lags are presented in parentheses. Adj. R$^{2}\left(\%\right)$ denotes the full sample adjusted coefficient of determination in percentage. The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \scriptsize
+    \begin{tabularx}{\textwidth}{lYYYYYYY}
+        \toprule
+        \input{Tables/e_insample_results_gsw_bonds}
+        \bottomrule
+        \label{Tab:e_insample_results_gsw_bonds}
+    \end{tabularx}
+\end{table}
+
+%----------------------------------------------------------------------------------------------------------------------
+% BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\bibliographystyle{ecta}
+\bibliography{e_refs}
+
+%----------------------------------------------------------------------------------------------------------------------
+% INTERNET APPENDIX
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Internet Appendix}
+
+\begin{appendices}
+
+\begin{center}
+    {
+        \large Internet Appendix for \vspace{0.25cm}\\
+        \mytitle \vspace{0.25cm}\\
+        (not intended for publication) \vspace{0.25cm}\\
+    }
+\end{center}
+
+% Setting up changes to layout for the appendix
+\setcounter{page}{1}
+\pagenumbering{roman}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{equation}{0}
+\renewcommand{\thesection}{IA.\Alph{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\theequation}{IA.\arabic{equation}}
+\renewcommand\thetable{IA.\arabic{table}} \setcounter{table}{0}
+\renewcommand\thefigure{IA.\arabic{figure}} \setcounter{figure}{0}
+
+%----------------------------------------------------------------------------------------------------------------------
+% INFORMATIONAL CONTENT AT DIFFERENT FORECAST HORIZONS
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\section{Predictive ability across forecast horizons}\label{sec:predictive_ability_across_forecast_horizons}
+To better understand the predictive ability of survey forecasts for different forecast horizons, we construct horizon specific versions of the first three principal components $\left(\mathcal{P}_{1,t}^{\mathbb{E}},\mathcal{P}_{2,t}^{\mathbb{E}},\mathcal{P}_{3,t}^{\mathbb{E}}\right)$ and the macroeconomic expectations factor, ME$_{t}$, using data from the Survey of Professional Forecasters (SPF).
+\begin{table}[htbp]
+    \footnotesize
+    \caption{
+        \textbf{Predictive ability across forecast horizons.} \newline
+        This table reports slope estimates from regressing one-year ahead bond risk premia upon horizon specific versions of the first three principal components ($\mathcal{P}_{1,t}^{\mathbb{E}}$,$\mathcal{P}_{2,t}^{\mathbb{E}}$,$\mathcal{P}_{3,t}^{\mathbb{E}}$) of the Survey of Professional Forecasters (SPF) forecasts and expected business conditions $\left(\text{ME}_{t}\right)$. Although not reported, all regressions contain an intercept. \cite{HansenHodrick1980} t-statistics implemented with four lags are presented in parentheses. Adj. R$^{2}\left(\%\right)$ denotes the full sample adjusted coefficient of determination in percentage. The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \begin{tabularx}{\textwidth}{lYYYYYYYY}
+        \toprule
+        \input{Tables/e_horizon_specific_pcs}
+        \bottomrule
+        \label{Tab:e_horizon_specific_pcs}
+    \end{tabularx}
+\end{table}
+We estimate the horizon specific principal components and ME$_{t}$ factors analogously to their full horizon counterparts in Section \ref{Sec:e_measuring_ebc}. The results, which are presented in Table \ref{Tab:e_horizon_specific_pcs}, show that the predictive ability of survey forecasts is not confined to a particular forecast horizon. In fact, albeit some heterogeneity is present in the loading sizes and significance, we see that the overall results are remarkably similar across forecast horizons. The pattern of loadings being an increasing function of bond maturity in absolute value emerges again and the same functions of horizon specific components forecast bond risk premia for all maturities. As such, we view our use of the full term structure of survey expectations as a way to average, in a sense, over the heterogeneities in the predictive abilities, thereby avoiding having to evaluate all possible combinations of components and forecast horizons in the SPF data. 
+
+%----------------------------------------------------------------------------------------------------------------------
+% THE TERM STRUCTURE OF EXPECTED BUSINESS CONDITIONS
+%----------------------------------------------------------------------------------------------------------------------
+
+\section{The term structure of survey forecasts}\label{sec:e_the_term_structure_of_expected_business_conditions}
+The descriptive statistics in Section \ref{Sec:e_measuring_ebc} suggested that survey forecasts are extrapolative in the forecast horizon.  
+\begin{figure}[tbp]
+    \caption{
+        \textbf{Term structure of expected business conditions.} \newline
+        This figure plots one- through four-quarter ahead forecasts from the Survey of Professional Forecasters (SPF). The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \includegraphics[scale=0.8]{Figures/e_survey_expectations.eps}
+    \label{Fig:e_survey_expectations}
+\end{figure}
+As a verification, we plot in Figure \ref{Fig:e_survey_expectations} one- through four-quarter ahead forecasts from the SPF. As suggested by the descriptive statistics, we see that the majority of the forecasts are indeed displaying extrapolative behavior.
+
+%----------------------------------------------------------------------------------------------------------------------
+% VISUALIZING PRINCIPAL COMPONENT LOADINGS
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\section{Visualizing principal component loadings}\label{sec:visualizing_principal_component_loaings}
+While the loadings from the principal component analysis are tabulated in Table \ref{Tab:e_sumstat_survey_variables}, this section provides a visual interpretation by plotting the loadings in bar form in Figure \ref{Fig:e_pca_loadings}.
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Principal component loadings.} \newline
+        This figure illustrates the loadings from the principal component analysis in Section \ref{Sec:e_measuring_ebc}. Loadings are grouped by macroeconomic fundamentals and ordered from shortest to longest forecast horizon. 
+    }
+    \centering
+    \includegraphics[scale=0.8]{Figures/e_pca_loadings.eps}
+    \label{Fig:e_pca_loadings}
+\end{figure}
+The interpretation is naturally identical to the one obtained from the tabulated loadings, but the visualization may be more informative in some aspects. In particular, the graphical illustration naturally revels that loadings are similar in size for a particular fundamental across forecast horizons, albeit some heterogeneity in loading sizes are present. However, no loading is placed entirely on a particular forecast horizon for any of the macroeconomic fundamentals. 
+
+%----------------------------------------------------------------------------------------------------------------------
+% PLOTTING PCA LOADINGS
+%----------------------------------------------------------------------------------------------------------------------
+
+\clearpage
+\section{Participation of individual forecasters}\label{sec:e_participation_of_individual_forecasters}
+As mentioned in Section \ref{Sec:e_measuring_ebc}, the average number of participating forecasters in our sample is about $36$ per quarter. However, this number fluctuates over time as individual forecasters exit and enter the sample at various points in time.\footnote{See \cite{CapistranTimmermann2009} for a discussion on how best to deal with these exits and entries from a forecasting perspective.} To illustrate the participation, we consider in Figure \ref{Fig:e_participating_forecasters} the one-quarter ahead forecasts provided for the GDP variable over our sample period. 
+\begin{figure}[htbp]
+    \caption{
+        \textbf{Participation of individual forecasters.} \newline
+        This figure illustrates the participation of individual forecasters over our sample period. The blue dots represents a submitted forecasts from forecaster $i$ at time $t$. Forecaster IDs with no forecast submissions have been removed for easier readability of the figure. As a result, our notation of Forecaster ID need not correspond to the ID from the Survey of Professional Forecasters (SPF). The sample period starts in 1968:Q4 and ends in 2014:Q4.
+    }
+    \centering
+    \includegraphics[scale=0.8]{Figures/e_participating_forecasters.eps}
+    \label{Fig:e_participating_forecasters}
+\end{figure}
+Each dot represents a response by forecaster $i$, who are represented by a unique, but anonymous, forecaster ID, at time $t$. We see that the composition of the panel of professional forecasters vary over time and that individual forecasters frequently enter, exit, and re-enter the sample at various points in time. 
+
+\end{appendices}
+\end{document}
+
+%----------------------------------------------------------------------------------------------------------------------
+% END OF DOCUMENT
+%----------------------------------------------------------------------------------------------------------------------
