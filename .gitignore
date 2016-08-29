@@ -1,0 +1,47 @@
+# Git ignore file for brp_survey paper
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.tdo
+*.fff
+*.lot
+*.lof
+*.ttt
+
+## Intermediate documents:
+*.dvi
+*-converted-to.*
+*.pdf
+*.ps
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.brf
+*.run.xml
+
+# beamer
+*.nav
+*.snm
+*.vrb
+
+# Folders
+/data/raw
+
+# Exceptions
